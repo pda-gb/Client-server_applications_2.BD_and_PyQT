@@ -41,11 +41,14 @@ while True:
         # запуск сервера ------
         # для linux .CREATE_NEW_CONSOLE не работает
         if sys.platform == 'Windows':
-            subprocess.Popen(f'python {work_dir}\server.py {port} {address}',
-                             creationflags=subprocess.CREATE_NEW_CONSOLE)
+            all_servers.append(
+                subprocess.Popen(f'python {work_dir}\server.py {port} '
+                                 f'{address}',
+                                 creationflags=subprocess.CREATE_NEW_CONSOLE)
+            )
         else:
             all_servers.append(
-                subprocess.Popen(f'x-terminal-emulator -e python '
+                subprocess.Popen(f'x-terminal-emulator -e python3 '
                                  f'{work_dir}/server.py {port} {address}',
                                  shell=True, start_new_session=True)
             )
@@ -57,13 +60,15 @@ while True:
             for i in range(count_client):
                 # для linux .CREATE_NEW_CONSOLE не работает
                 if sys.platform == 'Windows':
-                    subprocess.Popen(
-                        f'python {work_dir}\client.py {port} {address}',
-                        creationflags=subprocess.CREATE_NEW_CONSOLE
+                    all_clients.append(
+                        subprocess.Popen(
+                            f'python {work_dir}\client.py {port} {address}',
+                            creationflags=subprocess.CREATE_NEW_CONSOLE
+                        )
                     )
                 else:
                     all_clients.append(
-                        subprocess.Popen(f'x-terminal-emulator -e python '
+                        subprocess.Popen(f'x-terminal-emulator -e python3 '
                                          f'{work_dir}/client.py {port} '
                                          f'{address}', shell=True,
                                          start_new_session=True

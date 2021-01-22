@@ -45,7 +45,7 @@ while True:
                              creationflags=subprocess.CREATE_NEW_CONSOLE)
         else:
             all_servers.append(
-                subprocess.Popen(f'x-terminal-emulator -e python '
+                subprocess.Popen(f'x-terminal-emulator -e python3 '
                                  f'{work_dir}/server.py {port} {address}',
                                  shell=True, start_new_session=True)
             )
@@ -60,7 +60,7 @@ while True:
                     )
                 else:
                     all_clients.append(
-                        subprocess.Popen(f'x-terminal-emulator -e python '
+                        subprocess.Popen(f'x-terminal-emulator -e python3 '
                                          f'{work_dir}/client.py {port} '
                                          f'{address}', shell=True,
                                          start_new_session=True
